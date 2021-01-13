@@ -1,0 +1,3 @@
+rootProject.name = "Create Base"
+include ':app'
+include ':common'
