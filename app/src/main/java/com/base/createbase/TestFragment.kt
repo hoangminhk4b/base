@@ -1,7 +1,7 @@
 package com.base.createbase
 
 import android.view.View
-import app.base.common.base.butterknife.BaseFragment
+import app.base.common.base.viewbinding.BaseFragment
 
 // File TestFragment
 // @project Create Base
@@ -12,6 +12,6 @@ class TestFragment : BaseFragment() {
     }
 
     override fun initView(view: View) {
-        setTitle("ok nhé")
+        getHeaderBinding()?.tvTitleHeader?.text = " lên rồi nhé"
     }
 }

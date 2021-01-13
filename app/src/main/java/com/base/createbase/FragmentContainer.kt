@@ -8,6 +8,6 @@ import app.base.common.base.butterknife.BaseContainerFragment
 // @author minhhoang on 12-01-2021
 class FragmentContainer : BaseContainerFragment() {
     override fun initView(view: View) {
-        fragmentController.switchFragment(TestFragment::class.java, getOption("test"))
+        getFragmentController().switchFragment(TestFragment::class.java, getOption("test"))
     }
 }

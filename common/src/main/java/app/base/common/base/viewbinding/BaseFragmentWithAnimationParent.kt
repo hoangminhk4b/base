@@ -1,5 +1,6 @@
 package app.base.common.base.viewbinding
 
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import androidx.databinding.ViewDataBinding
@@ -13,10 +14,10 @@ abstract class BaseFragmentWithAnimationParent : BaseFragment() {
         return super.getFragmentController()
     }
 
-//    fun onLeft(view: View?) {
-//        setAnimationWithParentFragment(true)
-//        super.onLeft(view)
-//    }
+    override fun onLeft(view: View) {
+        setAnimationWithParentFragment(true)
+        super.onLeft(view)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -39,8 +40,14 @@ abstract class BaseFragment : Fragment() {
         Log.d("onCreateView", "onCreateView: run here")
         if (!this::binding.isInitialized) {
             binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-            headerBinding = HeaderLayoutBinding.bind(binding.root)
-            Utils.hideKeyword(binding.root, getBaseActivity())
+            val checkExist = binding.root.findViewById<RelativeLayout>(R.id.headerLayout)
+            checkExist?.let {
+                headerBinding = HeaderLayoutBinding.bind(binding.root)
+                headerBinding?.btLeft?.setOnClickListener(this::onLeft)
+                headerBinding?.btRight?.setOnClickListener(this::onRight)
+                headerBinding?.btRight1?.setOnClickListener(this::onRight1)
+            }
+            Utils.hideKeyword(binding.root, activity)
             initFragmentController()
             initView(binding.root)
         }
@@ -75,31 +82,62 @@ abstract class BaseFragment : Fragment() {
             .option
     }
 
-    protected open fun getBaseActivity(): BaseActivity {
-        return getActivity() as BaseActivity
-    }
-
 
     open fun getFragmentController(): FragmentController {
         return controllerFragment
 //        return getBaseActivity().getFragmentController();
     }
 
+    protected open fun setTitle(title: String?) {
+        getHeaderBinding()?.tvTitleHeader?.text = title
+    }
+
+    protected open fun setColorTitle(color: Int) {
+        getHeaderBinding()?.tvTitleHeader?.setTextColor(resources.getColor(color))
+    }
+
+    protected open fun setLeftImage(img: Int) {
+        getHeaderBinding()?.btLeft?.setImageResource(img)
+    }
+
+    protected open fun setRightImage(img: Int) {
+        getHeaderBinding()?.btRight?.setImageResource(img)
+    }
+
+    protected open fun setRight1Image(img: Int) {
+        getHeaderBinding()?.btRight1?.setImageResource(img)
+    }
+
+    //Set trạng thái ẩn hiện nút left: GONE, VISIBLE, INVISIBLE
+    protected open fun setStateLeft(state: Int) {
+        getHeaderBinding()?.btLeft?.visibility = state
+    }
+
+    //Set trạng thái ẩn hiện nút right
+    protected open fun setStateRight(state: Int) {
+        getHeaderBinding()?.btRight?.visibility = state
+    }
+
+    //Set trạng thái ẩn hiện nút right1
+    protected open fun setStateRight1(state: Int) {
+        getHeaderBinding()?.btRight1?.visibility = state
+    }
+
     protected open fun getChildLayoutReplace(): Int {
         return 0
     }
 
-    fun onLeft() {
+    open fun onLeft(view: View) {
         if (parentFragmentManager.backStackEntryCount > 0) {
             parentFragmentManager.popBackStack()
         } else {
-            getBaseActivity().onBackPressed()
+            activity?.onBackPressed()
         }
     }
 
-    fun onRight() {
+    open fun onRight(view: View) {
     }
 
-    fun onRight1() {
+    open fun onRight1(view: View) {
     }
 }

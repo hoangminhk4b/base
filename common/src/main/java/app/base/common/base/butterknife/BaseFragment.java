@@ -58,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
             ButterKnife.bind(this, view);
             setLeftImage(R.drawable.ic_back_left);
             setColorTitle(R.color.text_black);
-            Utils.hideKeyword(view, getBaseActivity());
+            Utils.hideKeyword(view, getActivity());
             initFragmentController();
             initView(view);
         }
@@ -152,10 +152,6 @@ public abstract class BaseFragment extends Fragment {
                 .getOption();
     }
 
-    protected BaseActivity getBaseActivity() {
-        return (BaseActivity) getActivity();
-    }
-
 
     public FragmentController getFragmentController() {
         return controllerFragment;
@@ -169,10 +165,10 @@ public abstract class BaseFragment extends Fragment {
     @Optional
     @OnClick(R2.id.btLeft)
     public void onLeft() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
+        if (getParentFragmentManager().getBackStackEntryCount() > 0) {
+            getParentFragmentManager().popBackStack();
         } else {
-            getBaseActivity().onBackPressed();
+            getActivity().onBackPressed();
         }
     }
 
