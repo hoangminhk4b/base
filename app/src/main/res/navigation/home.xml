@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_home"
+    app:startDestination="@id/tab1">
+
+    <fragment
+        android:id="@+id/tab1"
+        android:name="com.base.createbase.ui.tab1.Tab1ContainerFragment"
+        android:label="Tab1" >
+        <action
+            android:id="@+id/action_tab1_to_navigation_home2"
+            app:destination="@id/navigation_home" />
+    </fragment>
+</navigation>

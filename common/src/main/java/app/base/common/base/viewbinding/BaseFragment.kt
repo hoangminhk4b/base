@@ -37,7 +37,6 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        Log.d("onCreateView", "onCreateView: run here")
         if (!this::binding.isInitialized) {
             binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
             val checkExist = binding.root.findViewById<RelativeLayout>(R.id.headerLayout)
@@ -71,7 +70,7 @@ abstract class BaseFragment : Fragment() {
         view.setOnTouchListener { _, _ -> true }
     }
 
-    protected fun reloadData() {}
+    protected open fun reloadData() {}
 
     protected open fun getOption(tag: String?): FragmentController.Option? {
         return FragmentController.Option.Builder()
