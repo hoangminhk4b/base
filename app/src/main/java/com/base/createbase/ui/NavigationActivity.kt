@@ -37,7 +37,6 @@ class NavigationActivity : BaseActivity() {
      *
      */
     private fun setupBottomNavigationBar() {
-        //todo
         // Khi sử dụng navigation phải mở actionbar, tức trong theme phải mở action bar, nếu muốn ẩn thì phải supportActionBar?.hide()
         // id của navigation phải giống với id của bottom nav menu
         // navigation phải set startDestination
